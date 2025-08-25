@@ -1,35 +1,27 @@
 'use client';
-import Link from "next/link";
 
-export default function PlayLevelPage({
-  params,
-}: { params: { subject: string; level: string } }) {
-  const { subject, level } = params;
+import Link from "next/link";
+import { useParams } from "next/navigation";
+
+export default function PlayLevelPage() {
+  const { subject, level } = useParams<{ subject: string; level: string }>();
 
   return (
     <main style={{ maxWidth: 800, margin: "40px auto", padding: "0 16px" }}>
-      <h1>Play: {level.replace(/-/g, " ")}</h1>
-      <p>
-        Subject: <strong>{subject.toUpperCase()}</strong>
-      </p>
+      <h1>Play: {String(level).replace(/-/g, " ")}</h1>
+      <p>Subject: <strong>{String(subject).toUpperCase()}</strong></p>
 
       <div style={{
-        padding: 20,
-        marginTop: 16,
-        border: "2px dashed #bbb",
-        borderRadius: 12,
-        background: "#fafafa"
+        padding: 20, marginTop: 16, border: "2px dashed #bbb",
+        borderRadius: 12, background: "#fafafa"
       }}>
         <p><em>Game area placeholder.</em></p>
         <p>In Week 3–5 we’ll put the real interactive game here.</p>
         <button
           onClick={() => alert("Imagine the level completed!")}
           style={{
-            padding: "10px 16px",
-            borderRadius: 10,
-            border: "1px solid #ddd",
-            cursor: "pointer",
-            fontWeight: 600
+            padding: "10px 16px", borderRadius: 10,
+            border: "1px solid #ddd", cursor: "pointer", fontWeight: 600
           }}
         >
           Complete Level
