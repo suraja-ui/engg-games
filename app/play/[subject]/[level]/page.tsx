@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import StackGame from "@/app/components/StackGame";
+import RlcSandbox from "@/app/components/RlcSandbox";
 
 export default function PlayLevelPage() {
   const { subject, level } = useParams<{ subject: string; level: string }>();
@@ -18,9 +19,10 @@ export default function PlayLevelPage() {
         Subject: <strong>{subj.toUpperCase()}</strong>
       </p>
 
-      {/* Switch which game to show based on level */}
       {subj === "cse" && lvl === "stacks" ? (
         <StackGame />
+      ) : subj === "ece" && lvl === "rlc" ? (
+        <RlcSandbox />
       ) : (
         <Placeholder />
       )}
@@ -44,7 +46,7 @@ function Placeholder() {
       }}
     >
       <p><em>Game coming soon.</em></p>
-      <p>In later weeks we’ll add an interactive game for this level.</p>
+      <p>We’ll add interactivity for this level later.</p>
     </div>
   );
 }
