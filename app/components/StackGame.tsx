@@ -1,5 +1,7 @@
+
 'use client';
 
+import { useProgress } from "@/app/lib/progress";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -10,7 +12,9 @@ import { useEffect, useRef, useState } from "react";
  * - Score = number of correct operations done.
  */
 
+
 export default function StackGame() {
+  const { progress, completeOnce } = useProgress("cse_stacks");
   const [stack, setStack] = useState<string[]>([]);
   const [input, setInput] = useState("");
   const [message, setMessage] = useState<string>("");
@@ -64,6 +68,15 @@ export default function StackGame() {
     setMessage("Reset the stack.");
     setScore(0);
   }
+
+  useEffect(() => {
+    if (score >= 5) {
+      completeOnce(3, 50); // 3 stars, 50 XP
+    } else if (score >= 3 && progress.stars < 2) {
+      // optional mid-reward
+      // complete(2, 30)
+    }
+  }, [score, progress.stars, completeOnce]);
 
   return (
     <div style={{ display: "grid", gap: 12 }}>
