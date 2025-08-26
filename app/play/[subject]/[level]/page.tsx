@@ -28,8 +28,8 @@ export default function PlayLevelPage() {
       ) : subj === "mech" && lvl === "torque" ? (
         <BeamBalanceGame/>
       ) : (
-        <Placeholder />
-      )}  
+        <Placeholder subject={subj} level={lvl} />
+      )}
 
       <div style={{ marginTop: 20 }}>
         <Link href={`/subjects/${subj}`}>← Back to Levels</Link>
@@ -38,7 +38,7 @@ export default function PlayLevelPage() {
   );
 }
 
-function Placeholder() {
+function Placeholder({ subject, level }: { subject: string; level: string }) {
   return (
     <div
       style={{
@@ -47,10 +47,11 @@ function Placeholder() {
         border: "2px dashed #bbb",
         borderRadius: 12,
         background: "#fafafa",
+        textAlign: "center",
       }}
     >
-      <p><em>Game coming soon.</em></p>
-      <p>We’ll add interactivity for this level later.</p>
+      <p><em>{level} game coming soon.</em></p>
+      <p>Meanwhile, explore other levels in {subject.toUpperCase()}.</p>
     </div>
   );
 }
