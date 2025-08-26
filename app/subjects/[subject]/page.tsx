@@ -1,3 +1,5 @@
+import LevelItem from "@/app/components/LevelItem";
+
 type Level = { id: string; title: string };
 const LEVELS: Record<string, Level[]> = {
   cse: [
@@ -45,21 +47,9 @@ export default function SubjectLevelsPage({
       <h1>{title}</h1>
       <p>Pick a level:</p>
       <ul style={{ listStyle: "none", padding: 0 }}>
-        {levels.map(l => (
-          <li key={l.id} style={{ marginBottom: 12 }}>
-            <a
-              href={`/play/${subject}/${l.id}`}
-              style={{
-                display: "block",
-                padding: "12px 14px",
-                border: "1px solid #ddd",
-                borderRadius: 10,
-                textDecoration: "none",
-                color: "inherit",
-              }}
-            >
-              {l.title} →
-            </a>
+        {levels.map((l) => (
+          <li key={l.id}>
+            <LevelItem subject={subject} level={l} />
           </li>
         ))}
       </ul>
