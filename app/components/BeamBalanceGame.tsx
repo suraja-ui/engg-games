@@ -1,6 +1,9 @@
+
+
 'use client';
 
-import { useMemo, useRef, useState } from "react";
+import { useProgress } from "@/app/lib/progress";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * Drag & Drop Beam Balance Game
@@ -20,9 +23,11 @@ type Placed = {
 
 const SLOTS = [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]; // allowed positions (0 = pivot blocked)
 
+
 export default function BeamBalanceGame() {
   // current placed weights
   const [items, setItems] = useState<Placed[]>([]);
+  const { completeOnce } = useProgress("mech_torque");
   const beamRef = useRef<HTMLDivElement | null>(null);
 
   // palette weights
@@ -38,6 +43,14 @@ export default function BeamBalanceGame() {
       .reduce((sum, w) => sum + w.mass * Math.abs(w.pos), 0);
     return { leftTorque: L, rightTorque: R, balanced: L === R };
   }, [items]);
+
+  useEffect(() => {
+    const leftUsed = items.some(w => w.pos < 0);
+    const rightUsed = items.some(w => w.pos > 0);
+    if (balanced && leftUsed && rightUsed) {
+      completeOnce(3, 50);
+    }
+  }, [balanced, items, completeOnce]);
 
   // For a pretty tilt (visual only)
   const tiltDeg = Math.max(-12, Math.min(12, (rightTorque - leftTorque) / 5));
