@@ -1,5 +1,7 @@
- 'use client';
 
+'use client';
+
+import { useProgress } from "@/app/lib/progress";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 /**
@@ -16,7 +18,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 
 type SimPoint = { t: number; vC: number; i: number };
 
+
 export default function RlcSandbox() {
+  const { completeOnce } = useProgress("ece_rlc");
   // Sliders (UI units are user-friendly; convert to SI for math)
   const [R, setR] = useState(100);   // ohms
   const [L, setL] = useState(10);    // mH (milliHenries)
@@ -52,6 +56,15 @@ export default function RlcSandbox() {
     }
     return points;
   }, [R, L, C, duration]);
+
+  useEffect(() => {
+    if (!data.length) return;
+    const last = data[data.length - 1];
+    const closeToFive = Math.abs(last.vC - 5) <= 0.1;
+    if (closeToFive) {
+      completeOnce(3, 50);
+    }
+  }, [data, completeOnce]);
 
   // draw to <canvas>
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
