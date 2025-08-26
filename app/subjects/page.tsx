@@ -1,10 +1,30 @@
 type Subject = { id: string; name: string; emoji: string };
 
 const SUBJECTS: Subject[] = [
-  { id: "cse",  name: "Computer Science (CSE)", emoji: "💻" },
-  { id: "ece",  name: "Electronics & Communication (ECE)", emoji: "🔌" },
-  { id: "mech", name: "Mechanical (ME)", emoji: "⚙️" },
+  { id: "cse", name: "Computer Science", emoji: "💻" },
+  { id: "ece", name: "Electronics", emoji: "🔌" },
+  { id: "mech", name: "Mechanical", emoji: "⚙️" },
 ];
+
+const LEVELS: Record<string, { id: string; title: string }[]> = {
+  cse: [
+    { id: "stacks", title: "Stacks (Push/Pop)" },
+    { id: "queues", title: "Queues (Enqueue/Dequeue)" },
+    { id: "sorting", title: "Sorting Basics" },
+    { id: "graphs", title: "Graphs Basics" },
+  ],
+  ece: [
+    { id: "dc", title: "DC Circuits" },
+    { id: "rlc", title: "RLC Response" },
+    { id: "diodes", title: "Diodes & Rectifiers" },
+  ],
+  mech: [
+    { id: "torque", title: "Torque & Balance" },
+    { id: "beams", title: "Beams & Bending" },
+    { id: "shm", title: "Simple Harmonic Motion" },
+  ],
+};
+
 
 export default function SubjectsPage() {
   return (
