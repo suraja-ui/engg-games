@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import StackGame from "@/app/components/StackGame";
 import RlcSandbox from "@/app/components/RlcSandbox";
+import BeamBalanceGame from "@/app/components/BeamBalanceGame";
+
 
 export default function PlayLevelPage() {
   const { subject, level } = useParams<{ subject: string; level: string }>();
@@ -23,9 +25,11 @@ export default function PlayLevelPage() {
         <StackGame />
       ) : subj === "ece" && lvl === "rlc" ? (
         <RlcSandbox />
+      ) : subj === "mech" && lvl === "torque" ? (
+        <BeamBalanceGame/>
       ) : (
         <Placeholder />
-      )}
+      )}  
 
       <div style={{ marginTop: 20 }}>
         <Link href={`/subjects/${subj}`}>← Back to Levels</Link>
