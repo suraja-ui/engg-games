@@ -9,6 +9,7 @@ import QueueGame from "@/app/components/QueueGame";
 import DcCircuit from "@/app/components/DcCircuit";
 import BeamBendingSandbox from "@/app/components/BeamBendingSandbox";
 import SortingBasics from "@/app/components/SortingBasics";
+import GraphEditor from "@/app/components/GraphEditor";
 
 export default function PlayLevelPage() {
   const { subject, level } = useParams<{ subject: string; level: string }>();
@@ -38,6 +39,8 @@ export default function PlayLevelPage() {
         <StackGame />
       ) : subj === "cse" && lvl === "sorting" ? (
         <SortingBasics />
+      ) : subj === "cse" && lvl === "graphs" ? (
+        <GraphEditor />
       ) : (
         <Placeholder subject={subj} level={lvl} />
       )}
