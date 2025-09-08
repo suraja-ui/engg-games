@@ -5,7 +5,10 @@ import { useParams } from "next/navigation";
 import StackGame from "@/app/components/StackGame";
 import RlcSandbox from "@/app/components/RlcSandbox";
 import BeamBalanceGame from "@/app/components/BeamBalanceGame";
-
+import QueueGame from "@/app/components/QueueGame";
+import DcCircuit from "@/app/components/DcCircuit";
+import BeamBendingSandbox from "@/app/components/BeamBendingSandbox";
+import SortingBasics from "@/app/components/SortingBasics";
 
 export default function PlayLevelPage() {
   const { subject, level } = useParams<{ subject: string; level: string }>();
@@ -21,12 +24,20 @@ export default function PlayLevelPage() {
         Subject: <strong>{subj.toUpperCase()}</strong>
       </p>
 
-      {subj === "cse" && lvl === "stacks" ? (
-        <StackGame />
+      {subj === "mech" && lvl === "beams" ? (
+        <BeamBendingSandbox />
+      ) : subj === "mech" && lvl === "torque" ? (
+        <BeamBalanceGame />
+      ) : subj === "ece" && lvl === "dc" ? (
+        <DcCircuit />
       ) : subj === "ece" && lvl === "rlc" ? (
         <RlcSandbox />
-      ) : subj === "mech" && lvl === "torque" ? (
-        <BeamBalanceGame/>
+      ) : subj === "cse" && lvl === "queues" ? (
+        <QueueGame />
+      ) : subj === "cse" && lvl === "stacks" ? (
+        <StackGame />
+      ) : subj === "cse" && lvl === "sorting" ? (
+        <SortingBasics />
       ) : (
         <Placeholder subject={subj} level={lvl} />
       )}

@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useProgress } from "@/app/lib/progress";
@@ -106,7 +105,7 @@ export default function StackGame() {
           height: 320,
           border: "2px dashed #bbb",
           borderRadius: 12,
-          background: "#fafafa",
+          background: "#e6f0ff", // light blue
           padding: 12,
           display: "flex",
           alignItems: "flex-end",
@@ -128,18 +127,20 @@ export default function StackGame() {
           {stack.map((val, i) => (
             <div
               key={i}
-              ref={i === stack.length - 1 ? boxRef : null}
               style={{
-                padding: "10px 12px",
-                borderRadius: 8,
-                border: "1px solid #ddd",
-                background: "white",
+                width: 50,
+                height: 40,
+                background: "#1a73e8",   // 🔵 blue node
+                color: "black",          // value in black
+                border: "2px solid #0d47a1", // darker border
                 textAlign: "center",
-                fontWeight: 700,
-                boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
+                lineHeight: "40px",
+                borderRadius: 8,
+                fontWeight: 600,
+                fontSize: 16,
               }}
             >
-              {val}
+              {val}   {/* 👈 only the value */}
             </div>
           ))}
           {/* base label */}

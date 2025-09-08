@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import { useProgress } from "@/app/lib/progress";
@@ -108,32 +106,50 @@ export default function BeamBalanceGame() {
     setItems(prev => prev.filter(p => p.id !== id));
   }
 
+  function getWeightColor(mass: number) {
+    switch (mass) {
+      case 1: return "#4caf50"; // green
+      case 2: return "#2196f3"; // blue
+      case 3: return "#ff9800"; // orange
+      case 5: return "#f44336"; // red
+      default: return "#9e9e9e"; // gray fallback
+    }
+  }
+
   return (
     <div style={{ display: "grid", gap: 16 }}>
       <h2>Torque Balance (Drag & Drop) ⚖️</h2>
 
       {/* palette */}
-      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", color: "white" }}>
         <span style={{ color: "#555" }}>Drag a weight:</span>
-        {palette.map(m => (
-          <button
-            key={m}
-            draggable
-            onDragStart={(e) => onDragStart(e, m)}
-            style={{
-              padding: "10px 14px",
-              borderRadius: 8,
-              border: "1px solid #ddd",
-              cursor: "grab",
-              background: "white",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
-              userSelect: "none"
-            }}
-            title="Drag me onto the beam"
-          >
-            {m} kg
-          </button>
-        ))}
+        {[1, 2, 3, 5].map((m) => {
+          const colors: Record<number, string> = {
+            1: "#4caf50",  // green
+            2: "#2196f3",  // blue
+            3: "#ff9800",  // orange
+            5: "#f44336",  // red
+          };
+          return (
+            <button
+              key={m}
+              draggable
+              onDragStart={(e) => onDragStart(e, m)}
+              style={{
+                marginRight: 8,
+                padding: "10px 14px",
+                borderRadius: 8,
+                border: "2px solid #333",
+                background: colors[m],   // 🎨 dynamic color
+                color: "white",          // white text for contrast
+                fontWeight: 700,
+                cursor: "grab",
+              }}
+            >
+              {m} kg
+            </button>
+          );
+        })}
         <button onClick={reset} style={{ marginLeft: "auto" }}>
           Reset
         </button>
@@ -184,7 +200,7 @@ export default function BeamBalanceGame() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
           }}
         >
-          {/* slot ticks */}
+          {/* pivot label */}
           <div
             style={{
               position: "absolute",
@@ -197,6 +213,8 @@ export default function BeamBalanceGame() {
           >
             pivot
           </div>
+
+          {/* slot ticks */}
           {SLOTS.map((slot) => (
             <div
               key={slot}
@@ -214,7 +232,7 @@ export default function BeamBalanceGame() {
           ))}
 
           {/* placed weights */}
-          {items.map(w => (
+          {items.map((w) => (
             <button
               key={w.id}
               onClick={() => removeItem(w.id)}
@@ -224,18 +242,21 @@ export default function BeamBalanceGame() {
                 left: `calc(50% + ${w.pos * 7.5}%)`,
                 top: -36,
                 transform: "translateX(-20px)",
-                width: 40,
-                height: 28,
-                lineHeight: "28px",
+                width: 50,
+                height: 40,
+                lineHeight: "40px",
                 textAlign: "center",
-                borderRadius: 6,
-                border: "1px solid #999",
-                background: "#eee",
+                borderRadius: 8,
+                border: "2px solid #333",
+                background: getWeightColor(w.mass),  // 🎨 dynamic color
+                color: "black",
+                fontWeight: 600,
+                fontSize: 16,
                 cursor: "pointer",
                 userSelect: "none",
               }}
             >
-              {w.mass}kg
+              {w.mass}
             </button>
           ))}
         </div>
