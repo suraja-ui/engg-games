@@ -50,19 +50,19 @@ export default function HomePage() {
 
         <div style={heroRight}>
           <div style={mockup}>
-            <div style={mockupHeader}>Live preview: Beams — MECH</div>
+            <div style={mockupHeader}>Live preview: Stacks — CSE</div>
 
             <div style={mockupStage}>
-              <div style={node}>R1</div>
-              <div style={node}>R2</div>
-              <div style={node}>R3</div>
+              <div style={node}>10</div>
+              <div style={node}>20</div>
+              <div style={node}>30</div>
 
               <div style={mockupPanel}>
                 <div style={mpTitle}>Try a short challenge</div>
-                <div style={mpText}>Match the max deflection within ±5%</div>
+                <div style={mpText}>Push & Pop elements correctly to win ⭐</div>
                 <div style={mpBtnRow}>
-                  <Link href="/play/mech/beams" style={mpBtnPrimary}>Open Challenge</Link>
-                  <Link href="/subjects#mech" style={mpBtn}>See MECH Topics</Link>
+                  <Link href="/play/cse/stacks" style={mpBtnPrimary}>Open Challenge</Link>
+                  <Link href="/subjects#cse" style={mpBtn}>See CSE Topics</Link>
                 </div>
               </div>
             </div>
