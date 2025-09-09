@@ -49,61 +49,36 @@ export default function BeamBendingSandbox() {
 
   return (
     <div style={{ display: "grid", gap: 16, maxWidth: 500, margin: "0 auto" }}>
-      <h2 style={{ color: "black" }}>Beam Bending Sandbox</h2>
-      <div style={{ fontSize: 16, color: "black" }}>
+      <h2>Beam Bending Sandbox</h2>
+      <div style={{ fontSize: 16 }}>
         <b>F</b> = {F} N &nbsp; | &nbsp; <b>L</b> = {L} m &nbsp; | &nbsp; <b>E</b> = {E} GPa &nbsp; | &nbsp; <b>I</b> = {I} cm
       </div>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <div>
-          <label style={{ color: "black", fontWeight: 700 }}>Force (F, N)</label>
+          <div>Force (F, N)</div>
           <input type="range" min={10} max={1000} step={10} value={F} onChange={e => setF(Number(e.target.value))} />
-          <div style={{ color: "black" }}>{F} N</div>
+          <div>{F} N</div>
         </div>
         <div>
-          <label style={{ color: "black", fontWeight: 700 }}>Length (L, m)</label>
+          <div>Length (L, m)</div>
           <input type="range" min={0.5} max={5} step={0.1} value={L} onChange={e => setL(Number(e.target.value))} />
-          <div style={{ color: "black" }}>{L} m</div>
+          <div>{L} m</div>
         </div>
         <div>
-          <label style={{ color: "black", fontWeight: 700 }}>Modulus (E, GPa)</label>
+          <div>Modulus (E, GPa)</div>
           <input type="range" min={50} max={300} step={5} value={E} onChange={e => setE(Number(e.target.value))} />
-          <div style={{ color: "black" }}>{E} GPa</div>
+          <div>{E} GPa</div>
         </div>
         <div>
-          <label style={{ color: "black", fontWeight: 700 }}>Moment of Inertia (I, cm)</label>
+          <div>Moment of Inertia (I, cm)</div>
           <input type="range" min={1000} max={20000} step={100} value={I} onChange={e => setI(Number(e.target.value))} />
-          <div style={{ color: "black" }}>{I} cm</div>
+          <div>{I} cm</div>
         </div>
       </div>
-      <button
-        onClick={checkAnswer}
-        style={{
-          padding: "10px 16px",
-          borderRadius: 8,
-          background: "#1a73e8",
-          color: "white",
-          fontWeight: 700,
-          border: "none"
-        }}
-      >
-        Show Deflection
-      </button>
-      <button
-        onClick={reset}
-        style={{
-          marginTop: 10,
-          padding: "10px 16px",
-          borderRadius: 8,
-          background: "#f1f1f1",
-          color: "black",
-          fontWeight: 700,
-          border: "1px solid #ccc"
-        }}
-      >
-        Reset
-      </button>
+      <button onClick={checkAnswer} style={btn}>Show Deflection</button>
+      <button onClick={reset} style={{ ...btn, background: "#eee", color: "#333" }}>Reset</button>
       {message && <div style={{ padding: 10, borderRadius: 8, background: "#e6f7ee", border: "1px solid #bdeccb", color: "black", fontWeight: 600 }}>{message}</div>}
-      <div style={{ marginTop: 12, fontSize: 14, color: "black" }}>
+      <div style={{ color: "#666", fontSize: 14 }}>
         Tip: Try changing F, L, E, I to see how deflection changes. Lower E or I, or increase F or L, to increase deflection.
       </div>
     </div>

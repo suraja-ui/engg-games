@@ -336,29 +336,14 @@ export default function SHMSimulator() {
 
             <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
               <div style={{ fontWeight: 700 }}>Challenge target:</div>
-              <div style={{
-  padding: "6px 10px",
-  borderRadius: 8,
-  background: "#f1f8ff",
-  border: "1px solid #dceeff",
-  color: "black",      // ✅ force black text
-  fontWeight: 700
-}}>{targetMm.toFixed(1)} mm</div>
+              <div style={{ padding: "6px 10px", borderRadius: 8, background: "#f1f8ff", border: "1px solid #dceeff" }}>{targetMm.toFixed(1)} mm</div>
               <button onClick={() => checkChallenge()} style={btnPrimary}>Check</button>
               <button onClick={() => newTarget()} style={btn}>New Target</button>
             </div>
           </div>
 
           {message && (
-            <div style={{
-              marginTop: 10,
-              padding: 10,
-              borderRadius: 8,
-              background: message.startsWith("✅") ? "#e6f7ee" : "#fff3f3",
-              border: message.startsWith("✅") ? "1px solid #bdeccb" : "1px solid #f3c2c2",
-              color: "black",     // ✅
-              fontWeight: 700
-            }}>
+            <div style={{ marginTop: 10, padding: 10, borderRadius: 8, background: message.startsWith("✅") ? "#e6f7ee" : "#fff3f3", border: message.startsWith("✅") ? "1px solid #bdeccb" : "1px solid #f3c2c2", color: "black", fontWeight: 700 }}>
               {message}
             </div>
           )}
@@ -366,32 +351,32 @@ export default function SHMSimulator() {
 
         <div style={{ display: "grid", gap: 10 }}>
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Mass (m) — kg: {m.toFixed(2)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Mass (m) — kg: {m.toFixed(2)}</label>
             <input type="range" min={0.05} max={5} step={0.01} value={m} onChange={(e) => setM(Number(e.target.value))} style={{ width: "100%" }} />
           </div>
 
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Spring constant (k) — N/m: {k.toFixed(1)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Spring constant (k) — N/m: {k.toFixed(1)}</label>
             <input type="range" min={1} max={200} step={0.5} value={k} onChange={(e) => setK(Number(e.target.value))} style={{ width: "100%" }} />
           </div>
 
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Damping (c) — Ns/m: {c.toFixed(2)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Damping (c) — Ns/m: {c.toFixed(2)}</label>
             <input type="range" min={0} max={6} step={0.01} value={c} onChange={(e) => setC(Number(e.target.value))} style={{ width: "100%" }} />
           </div>
 
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Initial displacement x₀ (m): {x0.toFixed(3)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Initial displacement x₀ (m): {x0.toFixed(3)}</label>
             <input type="range" min={-0.25} max={0.5} step={0.001} value={x0} onChange={(e) => { setX0(Number(e.target.value)); setX(Number(e.target.value)); resetAll(); }} style={{ width: "100%" }} />
           </div>
 
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Initial velocity v₀ (m/s): {v0.toFixed(2)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Initial velocity v₀ (m/s): {v0.toFixed(2)}</label>
             <input type="range" min={-2} max={2} step={0.01} value={v0} onChange={(e) => { setV0(Number(e.target.value)); setV(Number(e.target.value)); resetAll(); }} style={{ width: "100%" }} />
           </div>
 
           <div>
-            <label style={{ display: "block", fontWeight: 700, color: "black" }}>Simulation step dt (s): {dt.toFixed(4)}</label>
+            <label style={{ display: "block", fontWeight: 700 }}>Simulation step dt (s): {dt.toFixed(4)}</label>
             <input type="range" min={1/500} max={1/30} step={1/1000} value={dt} onChange={(e) => setDt(Number(e.target.value))} style={{ width: "100%" }} />
             <div style={{ fontSize: 12, color: "#666", marginTop: 6 }}>Smaller dt = more accurate (slower)</div>
           </div>
@@ -407,19 +392,8 @@ const btn: React.CSSProperties = {
   borderRadius: 8,
   border: "1px solid #ddd",
   background: "#fff",
-  color: "black",   // ✅ black text
   cursor: "pointer",
   fontWeight: 700,
 };
-const btnPrimary: React.CSSProperties = {
-  ...btn,
-  background: "#1a73e8",
-  color: "white",   // keep white for blue buttons (Play/Pause/Check)
-  border: "1px solid #1a73e8",
-};
-const btnWarn: React.CSSProperties = {
-  ...btn,
-  background: "#fff3e0",
-  border: "1px solid #f0c27a",
-  color: "black",   // ✅ black text
-};
+const btnPrimary: React.CSSProperties = { ...btn, background: "#1a73e8", color: "white", border: "1px solid #1a73e8" };
+const btnWarn: React.CSSProperties = { ...btn, background: "#fff3e0", border: "1px solid #f0c27a" };

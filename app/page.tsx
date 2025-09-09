@@ -1,4 +1,5 @@
-// app/page.tsx
+"use client";
+
 import Link from "next/link";
 import React from "react";
 
@@ -249,7 +250,7 @@ const mockPreviewRow: React.CSSProperties = { display: "flex", gap: 8, alignItem
 const stackNode: React.CSSProperties = { background: "#1a73e8", color: "black", padding: "8px 10px", borderRadius: 8, fontWeight: 800 };
 const circuitPreview: React.CSSProperties = { display: "flex", gap: 8, alignItems: "center" };
 const ligBox: React.CSSProperties = { background: "#ffd54f", padding: "8px 10px", borderRadius: 8, fontWeight: 800 };
-const resBox: React.CSSProperties = { background: "#f1f3f5", padding: "8px 10px", borderRadius: 8, fontWeight: 800, color: "#071127" };
+const resBox: React.CSSProperties = { background: "f1f3f5", padding: "8px 10px", borderRadius: 8, fontWeight: 800, color: "#071127" };
 const beamPreview: React.CSSProperties = { display: "flex", alignItems: "center", justifyContent: "center", padding: 12 };
 const beamBar: React.CSSProperties = { width: "80%", height: 12, background: "linear-gradient(90deg,#1a73e8,#34d399)", borderRadius: 8 };
 

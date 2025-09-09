@@ -360,9 +360,9 @@ export default function SortingBasics() {
         <button style={mergeBtn} onClick={() => addOne("Merge")}>Merge Sort</button>
         <button style={quickBtn} onClick={() => addOne("Quick")}>Quick Sort</button>
         <button style={heapBtn} disabled>Heap Sort</button>
-        <button onClick={addAll} style={{ padding: "8px 12px", borderRadius: 8, background: "#1a73e8", color: "white", fontWeight: 700 }}>Add All Sorts</button>
-        <button onClick={resetAllCards} style={{ marginLeft: "auto", padding: "8px 10px", borderRadius: 8 }}>Clear</button>
       </div>
+      <button onClick={addAll} style={{ padding: "8px 12px", borderRadius: 8, background: "#1a73e8", color: "white", fontWeight: 700, marginTop: 8 }}>Add All Sorts</button>
+      <button onClick={resetAllCards} style={{ marginLeft: 8, padding: "8px 10px", borderRadius: 8 }}>Clear</button>
 
       <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))" }}>
         {cards.map((name) => <SortCard key={name} name={name} />)}
@@ -374,6 +374,15 @@ export default function SortingBasics() {
     </div>
   );
 }
+
+const controlBtn: React.CSSProperties = {
+  padding: "8px 12px",
+  borderRadius: 8,
+  border: "1px solid #ddd",
+  background: "#fff",
+  cursor: "pointer",
+  fontWeight: 700,
+};
 
 const baseBtn: React.CSSProperties = {
   padding: "10px 16px",
@@ -389,7 +398,7 @@ const selectionBtn: React.CSSProperties = { ...baseBtn, background: "#28A745" };
 const insertionBtn: React.CSSProperties = { ...baseBtn, background: "#6F42C1" };
 const mergeBtn: React.CSSProperties = { ...baseBtn, background: "#FD7E14" };
 const quickBtn: React.CSSProperties = { ...baseBtn, background: "#DC3545" };
-const heapBtn: React.CSSProperties = { ...baseBtn, background: "#FFC107", color: "black" }; // yellow
+const heapBtn: React.CSSProperties = { ...baseBtn, background: "#FFC107", color: "black" }; // yellow needs dark text
 
 /* button styles for sorting controls */
 const baseControlBtn: React.CSSProperties = {
@@ -402,7 +411,7 @@ const baseControlBtn: React.CSSProperties = {
 };
 
 /* primary action (Play) - green */
-const playBtn: React.CSSProperties = {
+export const playBtn: React.CSSProperties = {
   ...baseControlBtn,
   background: "#28A745",
   color: "white",
@@ -410,7 +419,7 @@ const playBtn: React.CSSProperties = {
 };
 
 /* pause (when playing) - gray */
-const pauseBtn: React.CSSProperties = {
+export const pauseBtn: React.CSSProperties = {
   ...baseControlBtn,
   background: "#6C757D",
   color: "white",
@@ -418,7 +427,7 @@ const pauseBtn: React.CSSProperties = {
 };
 
 /* step - teal */
-const stepBtn: React.CSSProperties = {
+export const stepBtn: React.CSSProperties = {
   ...baseControlBtn,
   background: "#17A2B8",
   color: "white",
@@ -426,7 +435,7 @@ const stepBtn: React.CSSProperties = {
 };
 
 /* back - coral/orange */
-const backBtn: React.CSSProperties = {
+export const backBtn: React.CSSProperties = {
   ...baseControlBtn,
   background: "#FF7F50",
   color: "white",
@@ -434,7 +443,7 @@ const backBtn: React.CSSProperties = {
 };
 
 /* reset - red */
-const resetBtn: React.CSSProperties = {
+export const resetBtn: React.CSSProperties = {
   ...baseControlBtn,
   background: "#DC3545",
   color: "white",

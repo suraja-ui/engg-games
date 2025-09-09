@@ -1,4 +1,4 @@
-// app/about/page.tsx
+import Image from "next/image";
 import React from "react";
 
 export default function AboutPage() {
@@ -7,19 +7,12 @@ export default function AboutPage() {
       <section style={card}>
         <div style={left}>
           {/* profile photo */}
-          <img
-            src="/profile.jpg"
+          <Image
+            src="/profile.jpg" // place your uploaded image in /public/profile.jpg
             alt="Suraja Goudar"
             width={220}
             height={220}
-            style={{
-              borderRadius: "50%",
-              objectFit: "cover",
-              width: 220,
-              height: 220,
-              border: "4px solid #1a73e8",
-              display: "block"
-            }}
+            style={{ borderRadius: "50%", objectFit: "cover", border: "4px solid #1a73e8" }}
           />
         </div>
 

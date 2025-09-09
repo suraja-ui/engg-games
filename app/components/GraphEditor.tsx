@@ -284,41 +284,24 @@ export default function GraphEditor({
   const adj = adjacencyList();
 
   return (
-    <div style={{
-      display: "grid",
-      gap: 12,
-      padding: 18,
-      minHeight: "100vh",
-      boxSizing: "border-box",
-      background: "#0b1220",   // page background (dark)
-      color: "#f7fafc",        // default text color (light)
-      fontFamily: "Inter, system-ui, sans-serif"
-    }}>
-      <div style={{ display: "flex", gap: 8, alignItems: "center", alignContent: "center" }}>
-        <h3 style={{ margin: 0, color: "#ffffff", fontWeight: 800 }}>Graph Editor</h3>
-
-        <label style={{ color: "#cbd5e1", marginLeft: 12, display: "flex", alignItems: "center", gap: 6 }}>
-          <input type="checkbox" checked={directed} onChange={(e) => setDirected(e.target.checked)} />
-          <span style={{ color: "#e2e8f0" }}>Directed</span>
+    <div style={{ display: "grid", gap: 12 }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+        <h3 style={{ margin: 0 }}>Graph Editor</h3>
+        <label style={{ marginLeft: 12 }}>
+          <input type="checkbox" checked={directed} onChange={(e) => setDirected(e.target.checked)} /> Directed
+        </label>
+        <label>
+          <input type="checkbox" checked={weighted} onChange={(e) => setWeighted(e.target.checked)} /> Weighted
         </label>
 
-        <label style={{ color: "#cbd5e1", display: "flex", alignItems: "center", gap: 6 }}>
-          <input type="checkbox" checked={weighted} onChange={(e) => setWeighted(e.target.checked)} />
-          <span style={{ color: "#e2e8f0" }}>Weighted</span>
-        </label>
-
-        <button style={{ marginLeft: 12, padding: "6px 10px", borderRadius: 8, background: "#1a73e8", color: "white", border: "none", fontWeight: 700 }} onClick={() => randomGraph(6, 0.25)}>Random Graph</button>
-
-        <button style={{ padding: "6px 10px", borderRadius: 8, background: "#1f2937", color: "#e6eef8", border: "1px solid #2b3442" }} onClick={() => { setNodes([]); setEdges([]); }}>New Blank</button>
-
-        <button style={{ padding: "6px 10px", borderRadius: 8, background: "#111827", color: "#e6eef8", border: "1px solid #2b3442" }} onClick={() => exportJson()}>Export JSON</button>
-
+        <button onClick={() => randomGraph(6, 0.25)} style={{ marginLeft: 12 }}>Random Graph</button>
+        <button onClick={() => { setNodes([]); setEdges([]); }}>New Blank</button>
+        <button onClick={() => exportJson()}>Export JSON</button>
         <label style={{ display: "inline-block" }}>
           <input type="file" accept="application/json" style={{ display: "none" }} onChange={(ev) => importJsonFile(ev.target.files?.[0] ?? null)} />
-          <span style={{ padding: "6px 10px", border: "1px solid #2b3442", borderRadius: 6, cursor: "pointer", color: "#e6eef8", background: "#111827" }}>Import JSON</span>
+          <span style={{ padding: "6px 10px", border: "1px solid #ddd", borderRadius: 6, cursor: "pointer" }}>Import JSON</span>
         </label>
-
-        <button onClick={() => clearAll()} style={{ marginLeft: "auto", background: "#3b0c0c", color: "#ffecec", padding: "6px 10px", borderRadius: 6 }}>Clear All</button>
+        <button onClick={() => clearAll()} style={{ marginLeft: "auto", background: "#fff5f5" }}>Clear All</button>
       </div>
 
       <div style={{ display: "flex", gap: 12 }}>
@@ -326,12 +309,7 @@ export default function GraphEditor({
           ref={svgRef}
           width={900}
           height={320}
-          style={{
-            border: "2px dashed #2b3442",
-            borderRadius: 8,
-            background: "#f8fafc",
-            boxShadow: "0 8px 20px rgba(2,6,23,0.6)"
-          }}
+          style={{ border: "2px dashed #bbb", borderRadius: 8, background: "#fff" }}
           onClick={onSvgClick}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
@@ -387,8 +365,8 @@ export default function GraphEditor({
                 r={20}
                 cx={0}
                 cy={0}
-                fill={selected === n.id ? "#fff3bf" : "#dbeafe"}
-                stroke="#0b5ed7"
+                fill={selected === n.id ? "#ffe082" : "#e3f2fd"}
+                stroke="#2196f3"
                 strokeWidth={2}
                 onPointerDown={(e) => onNodePointerDown(e, n)}
                 onPointerUp={() => { /* noop */ }}
@@ -413,16 +391,7 @@ export default function GraphEditor({
         <div style={{ width: 360 }}>
           <div style={{ marginBottom: 8 }}>
             <b>Adjacency List</b>
-            <div style={{
-              maxHeight: 180,
-              overflow: "auto",
-              marginTop: 6,
-              padding: 8,
-              border: "1px solid #2b3442",
-              borderRadius: 6,
-              background: "#0f1724",
-              color: "#e6eef8"
-            }}>
+            <div style={{ maxHeight: 180, overflow: "auto", marginTop: 6, padding: 8, border: "1px solid #eee", borderRadius: 6, background: "#fafafa" }}>
               {nodes.length === 0 ? <div style={{ color: "#666" }}>No nodes</div> :
                 nodes.map((n) => (
                   <div key={n.id} style={{ marginBottom: 6 }}>
@@ -442,28 +411,20 @@ export default function GraphEditor({
 
           <div style={{ marginTop: 8 }}>
             <b>Adjacency Matrix</b>
-            <div style={{
-              overflowX: "auto",
-              marginTop: 6,
-              border: "1px solid #2b3442",
-              borderRadius: 6,
-              padding: 8,
-              background: "#071127",
-              color: "#e6eef8"
-            }}>
+            <div style={{ overflowX: "auto", marginTop: 6, border: "1px solid #eee", borderRadius: 6, padding: 8, background: "#fff" }}>
               <table style={{ borderCollapse: "collapse", width: "100%" }}>
                 <thead>
                   <tr>
-                    <th style={{ borderBottom: "1px solid #253043", padding: 6, color: "#e6eef8" }}></th>
-                    {nodes.map((n) => <th key={n.id} style={{ borderBottom: "1px solid #253043", padding: 6, color: "#e6eef8" }}>{n.label}</th>)}
+                    <th style={{ borderBottom: "1px solid #eee", padding: 6 }}></th>
+                    {nodes.map((n) => <th key={n.id} style={{ borderBottom: "1px solid #eee", padding: 6 }}>{n.label}</th>)}
                   </tr>
                 </thead>
                 <tbody>
                   {ids.map((rid, i) => (
                     <tr key={rid}>
-                      <td style={{ padding: 6, borderBottom: "1px solid #1b2630", color: "#e6eef8" }}><b>{getNode(rid)?.label}</b></td>
+                      <td style={{ padding: 6, borderBottom: "1px solid #f5f5f5" }}><b>{getNode(rid)?.label}</b></td>
                       {ids.map((cid, j) => (
-                        <td key={cid} style={{ textAlign: "center", padding: 6, borderBottom: "1px solid #1b2630", color: "#e6eef8" }}>{mat[i][j] ?? 0}</td>
+                        <td key={cid} style={{ textAlign: "center", padding: 6, borderBottom: "1px solid #f5f5f5" }}>{mat[i][j] ?? 0}</td>
                       ))}
                     </tr>
                   ))}

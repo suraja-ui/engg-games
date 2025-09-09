@@ -88,7 +88,7 @@ export default function QueueGame() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter value"
-          style={{ background: "white", color: "black", padding: "10px 12px", border: "1px solid #ccc", borderRadius: 8 }}
+          style={{ padding: "10px 12px", border: "1px solid #ddd", borderRadius: 8 }}
         />
         <button onClick={enqueue} style={btn}>Enqueue</button>
         <button onClick={dequeue} style={btn}>Dequeue</button>
@@ -98,7 +98,7 @@ export default function QueueGame() {
       </div>
 
       {/* Message */}
-      <div style={{ minHeight: 22, color: "black" }}>{message}</div>
+      <div style={{ minHeight: 22, color: "#333" }}>{message}</div>
 
       {/* Queue visual */}
       <div style={{

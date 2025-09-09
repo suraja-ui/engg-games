@@ -85,13 +85,7 @@ export default function StackGame() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter value"
-          style={{
-            background: "white",
-            color: "black",   // ✅ Fix: visible text
-            padding: "8px",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-          }}
+          style={{ padding: "10px 12px", border: "1px solid #ddd", borderRadius: 8 }}
         />
         <button onClick={push} style={btn}>Push</button>
         <button onClick={pop} style={btn}>Pop</button>
@@ -101,7 +95,7 @@ export default function StackGame() {
 
       {/* Message & score */}
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-        <div style={{ minHeight: 22, color: "black" }}>{message}</div>
+        <div style={{ minHeight: 22, color: "#333" }}>{message}</div>
         <div style={{ marginLeft: "auto", fontWeight: 700 }}>Score: {score}</div>
       </div>
 
