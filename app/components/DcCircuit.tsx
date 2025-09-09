@@ -162,7 +162,7 @@ export default function DcCircuit() {
             </div>
 
             <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-              <button onClick={checkAnswer} style={{ padding: "8px 12px", borderRadius: 8, background: "#1a73e8", color: "white", border: "none", fontWeight: 700 }}>Check</button>
+              <button onClick={checkAnswer} style={{ padding: "8px 12px", borderRadius: 8, background: "#1a73e8", color: "black", border: "none", fontWeight: 700 }}>Check</button>
               <button onClick={() => setTarget(+(Math.max(0.001, (0.02 + Math.random() * 0.3))).toFixed(4))} style={{ padding: "8px 12px", borderRadius: 8, background: "#eee", border: "1px solid #ddd" }}>New Target</button>
               <button onClick={() => { setR1(100); setR2(100); setR3(100); setV(5); }} style={{ padding: "8px 12px", borderRadius: 8, background: "#fff3e0", border: "1px solid #f0c27a" }}>Reset Values</button>
             </div>

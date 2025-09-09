@@ -18,6 +18,9 @@ type Step =
 const ALGORITHMS = ["Bubble", "Selection", "Insertion", "Merge", "Quick"] as const;
 type AlgName = (typeof ALGORITHMS)[number];
 
+const MIN_DELAY = 60;   // ms (slowest)
+const MAX_DELAY = 800;  // ms (fastest when inverted)
+
 function randArray(n = 12, max = 100) {
   return Array.from({ length: n }, () => Math.floor(Math.random() * max) + 5);
 }
@@ -274,16 +277,48 @@ function SortCard({ name, seed }: { name: AlgName; seed?: number }) {
 
       {/* controls */}
       <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-        <button onClick={() => setPlaying((p) => !p)} style={controlBtn}>{playing ? "Pause" : "Play"}</button>
-        <button onClick={() => { stepForward(); setPlaying(false); }} style={controlBtn}>Step</button>
-        <button onClick={() => { stepBackward(); }} style={controlBtn}>Back</button>
-        <button onClick={resetAll} style={controlBtn}>Reset</button>
+        <button
+          onClick={() => setPlaying((p) => !p)}
+          style={playing ? pauseBtn : playBtn}
+        >
+          {playing ? "Pause" : "Play"}
+        </button>
 
-        <label style={{ marginLeft: "auto", color: "#666", fontSize: 13 }}>
-          Speed
-          <input type="range" min={60} max={800} defaultValue={300}
-            onChange={(e) => { speedRef.current = Number(e.target.value); }}
-            style={{ marginLeft: 8, verticalAlign: "middle" }} />
+        <button
+          onClick={() => { stepForward(); setPlaying(false); }}
+          style={stepBtn}
+        >
+          Step
+        </button>
+
+        <button
+          onClick={() => { stepBackward(); }}
+          style={backBtn}
+        >
+          Back
+        </button>
+
+        <button
+          onClick={resetAll}
+          style={resetBtn}
+        >
+          Reset
+        </button>
+
+        <label style={{ marginLeft: "auto", color: "#333", fontSize: 13 }}>
+          Speed (higher = faster)
+          <input
+            type="range"
+            min={MIN_DELAY}
+            max={MAX_DELAY}
+            defaultValue={Math.round((MIN_DELAY + MAX_DELAY) / 2)}
+            onChange={(e) => {
+              const v = Number(e.target.value);
+              // invert slider so larger value -> smaller delay -> faster
+              speedRef.current = (MIN_DELAY + MAX_DELAY) - v;
+            }}
+            style={{ marginLeft: 8, verticalAlign: "middle" }}
+          />
         </label>
       </div>
 
@@ -318,11 +353,14 @@ export default function SortingBasics() {
     <div style={{ display: "grid", gap: 16 }}>
       <h2>Sorting Basics</h2>
 
-      <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+        <button style={bubbleBtn} onClick={() => addOne("Bubble")}>Bubble Sort</button>
+        <button style={selectionBtn} onClick={() => addOne("Selection")}>Selection Sort</button>
+        <button style={insertionBtn} onClick={() => addOne("Insertion")}>Insertion Sort</button>
+        <button style={mergeBtn} onClick={() => addOne("Merge")}>Merge Sort</button>
+        <button style={quickBtn} onClick={() => addOne("Quick")}>Quick Sort</button>
+        <button style={heapBtn} disabled>Heap Sort</button>
         <button onClick={addAll} style={{ padding: "8px 12px", borderRadius: 8, background: "#1a73e8", color: "white", fontWeight: 700 }}>Add All Sorts</button>
-        {ALGORITHMS.map(a => (
-          <button key={a} onClick={() => addOne(a)} style={{ padding: "8px 10px", borderRadius: 8, border: "1px solid #ddd" }}>{a}</button>
-        ))}
         <button onClick={resetAllCards} style={{ marginLeft: "auto", padding: "8px 10px", borderRadius: 8 }}>Clear</button>
       </div>
 
@@ -337,11 +375,68 @@ export default function SortingBasics() {
   );
 }
 
-const controlBtn: React.CSSProperties = {
+const baseBtn: React.CSSProperties = {
+  padding: "10px 16px",
+  border: "none",
+  borderRadius: "8px",
+  fontWeight: 600,
+  color: "white",
+  cursor: "pointer",
+};
+
+const bubbleBtn: React.CSSProperties = { ...baseBtn, background: "#1E90FF" };
+const selectionBtn: React.CSSProperties = { ...baseBtn, background: "#28A745" };
+const insertionBtn: React.CSSProperties = { ...baseBtn, background: "#6F42C1" };
+const mergeBtn: React.CSSProperties = { ...baseBtn, background: "#FD7E14" };
+const quickBtn: React.CSSProperties = { ...baseBtn, background: "#DC3545" };
+const heapBtn: React.CSSProperties = { ...baseBtn, background: "#FFC107", color: "black" }; // yellow
+
+/* button styles for sorting controls */
+const baseControlBtn: React.CSSProperties = {
   padding: "8px 12px",
   borderRadius: 8,
-  border: "1px solid #ddd",
-  background: "#fff",
+  border: "none",
   cursor: "pointer",
   fontWeight: 700,
+  boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+};
+
+/* primary action (Play) - green */
+const playBtn: React.CSSProperties = {
+  ...baseControlBtn,
+  background: "#28A745",
+  color: "white",
+  border: "1px solid #238636",
+};
+
+/* pause (when playing) - gray */
+const pauseBtn: React.CSSProperties = {
+  ...baseControlBtn,
+  background: "#6C757D",
+  color: "white",
+  border: "1px solid #5a6268",
+};
+
+/* step - teal */
+const stepBtn: React.CSSProperties = {
+  ...baseControlBtn,
+  background: "#17A2B8",
+  color: "white",
+  border: "1px solid #138496",
+};
+
+/* back - coral/orange */
+const backBtn: React.CSSProperties = {
+  ...baseControlBtn,
+  background: "#FF7F50",
+  color: "white",
+  border: "1px solid #e06b38",
+};
+
+/* reset - red */
+const resetBtn: React.CSSProperties = {
+  ...baseControlBtn,
+  background: "#DC3545",
+  color: "white",
+  border: "1px solid #c82333",
 };

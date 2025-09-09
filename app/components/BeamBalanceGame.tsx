@@ -121,7 +121,7 @@ export default function BeamBalanceGame() {
       <h2>Torque Balance (Drag & Drop) ⚖️</h2>
 
       {/* palette */}
-      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", color: "white" }}>
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", color: "black" }}>
         <span style={{ color: "#555" }}>Drag a weight:</span>
         {[1, 2, 3, 5].map((m) => {
           const colors: Record<number, string> = {
@@ -140,8 +140,8 @@ export default function BeamBalanceGame() {
                 padding: "10px 14px",
                 borderRadius: 8,
                 border: "2px solid #333",
-                background: colors[m],   // 🎨 dynamic color
-                color: "white",          // white text for contrast
+                background: colors[m],
+                color: "black",          // black text for contrast
                 fontWeight: 700,
                 cursor: "grab",
               }}
