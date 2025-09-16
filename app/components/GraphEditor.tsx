@@ -389,42 +389,85 @@ export default function GraphEditor({
         </svg>
 
         <div style={{ width: 360 }}>
-          <div style={{ marginBottom: 8 }}>
-            <b>Adjacency List</b>
-            <div style={{ maxHeight: 180, overflow: "auto", marginTop: 6, padding: 8, border: "1px solid #eee", borderRadius: 6, background: "#fafafa" }}>
-              {nodes.length === 0 ? <div style={{ color: "#666" }}>No nodes</div> :
-                nodes.map((n) => (
-                  <div key={n.id} style={{ marginBottom: 6 }}>
-                    <b>{n.label}</b>:
-                    {(adj[n.id] ?? []).length === 0 ? <span style={{ color: "#666", marginLeft: 6 }}> (no neighbors)</span> :
-                      (adj[n.id] || []).map((p, i) => (
-                        <span key={i} style={{ display: "inline-block", marginLeft: 8, padding: "2px 6px", borderRadius: 6, background: "#fff", border: "1px solid #eee" }}>
-                          {getNode(p.to)?.label ?? p.to}{p.weight ? ` (${p.weight})` : ""}
-                        </span>
-                      ))
-                    }
-                  </div>
-                ))
-              }
-            </div>
+          {/* Adjacency List (modern, high-contrast) */}
+          <div
+            style={{
+              marginTop: 12,
+              border: "1px solid #e6e6e6",
+              borderRadius: 6,
+              padding: 12,
+              background: "#ffffff", // white background
+              color: "#000000",      // black text
+            }}
+          >
+            <h3 style={{ margin: "0 0 8px 0", color: "#000" }}>Adjacency List</h3>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+              {ids.map((rid, i) => (
+                <li key={rid} style={{ marginBottom: 6 }}>
+                  <b style={{ color: "#000" }}>{getNode(rid)?.label}</b> →{" "}
+                  {ids
+                    .filter((cid, j) => mat[i][j] !== 0 && mat[i][j] !== null)
+                    .map((cid) => (
+                      <span
+                        key={cid}
+                        style={{
+                          marginRight: 8,
+                          background: "#f3f4f6",
+                          padding: "2px 6px",
+                          borderRadius: 6,
+                          color: "#000",
+                        }}
+                      >
+                        {getNode(cid)?.label}
+                      </span>
+                    ))}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div style={{ marginTop: 8 }}>
             <b>Adjacency Matrix</b>
-            <div style={{ overflowX: "auto", marginTop: 6, border: "1px solid #eee", borderRadius: 6, padding: 8, background: "#fff" }}>
+            {/* Adjacency Matrix (updated for white cells and black text) */}
+            <div style={{
+              overflowX: "auto",
+              marginTop: 6,
+              border: "1px solid rgba(0,0,0,0.06)",
+              borderRadius: 6,
+              padding: 8,
+              background: "transparent"
+            }}>
               <table style={{ borderCollapse: "collapse", width: "100%" }}>
                 <thead>
                   <tr>
-                    <th style={{ borderBottom: "1px solid #eee", padding: 6 }}></th>
-                    {nodes.map((n) => <th key={n.id} style={{ borderBottom: "1px solid #eee", padding: 6 }}>{n.label}</th>)}
+                    <th style={{ borderBottom: "1px solid #e6e6e6", padding: 6, background: "#ffffff", color: "#000", textAlign: "center" }}></th>
+                    {nodes.map((n) =>
+                      <th key={n.id}
+                          style={{ borderBottom: "1px solid #e6e6e6", padding: 6, background: "#ffffff", color: "#000", textAlign: "center" }}>
+                        {n.label}
+                      </th>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
                   {ids.map((rid, i) => (
                     <tr key={rid}>
-                      <td style={{ padding: 6, borderBottom: "1px solid #f5f5f5" }}><b>{getNode(rid)?.label}</b></td>
+                      <td style={{ padding: 6, borderBottom: "1px solid #f0f0f0", background: "#ffffff", color: "#000", fontWeight: 700 }}>
+                        <b>{getNode(rid)?.label}</b>
+                      </td>
                       {ids.map((cid, j) => (
-                        <td key={cid} style={{ textAlign: "center", padding: 6, borderBottom: "1px solid #f5f5f5" }}>{mat[i][j] ?? 0}</td>
+                        <td
+                          key={cid}
+                          style={{
+                            textAlign: "center",
+                            padding: 6,
+                            borderBottom: "1px solid #f0f0f0",
+                            background: "#ffffff",
+                            color: "#000",
+                            fontWeight: 700
+                          }}>
+                          {mat[i][j] ?? 0}
+                        </td>
                       ))}
                     </tr>
                   ))}
