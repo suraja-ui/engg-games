@@ -35,7 +35,6 @@ import DcCircuit from "@/app/components/DcCircuit";
 import BeamBendingSandbox from "@/app/components/BeamBendingSandbox";
 import SortingBasics from "@/app/components/SortingBasics";
 import GraphEditor from "@/app/components/GraphEditor";
-import SHMSimulator from "@/app/components/SHMSimulator";
 
 function PlayLevelPageClient({ subject, level }: { subject: string; level: string }) {
   const subj = String(subject);
@@ -54,8 +53,6 @@ function PlayLevelPageClient({ subject, level }: { subject: string; level: strin
         <BeamBendingSandbox />
       ) : subj === "mech" && lvl === "torque" ? (
         <BeamBalanceGame />
-      ) : subj === "mech" && lvl === "shm" ? (
-        <SHMSimulator />
       ) : subj === "ece" && lvl === "dc" ? (
         <DcCircuit />
       ) : subj === "ece" && lvl === "rlc" ? (

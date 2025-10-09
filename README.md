@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Engineering Games
+
+This is a [Next.js](https://nextjs.org) project featuring interactive engineering games and simulations.
 
 ## Getting Started
 
@@ -18,19 +20,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- **Interactive Games**: Stack operations, Queue management, Sorting algorithms
+- **Engineering Simulations**: Beam mechanics, Circuit analysis, SHM simulation
+- **Graph Editor**: Create and visualize graphs with adjacency lists/matrices
+- **Subject-based Learning**: CSE, ECE, and Mechanical Engineering topics
 
-To learn more about Next.js, take a look at the following resources:
+## Build for Production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is configured for static export to work with Netlify:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+The static files will be generated in the `out` directory.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy on Netlify
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project is configured for Netlify deployment with:
+- Static export via Next.js
+- Proper routing configuration
+- Build optimization for static hosting
+
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

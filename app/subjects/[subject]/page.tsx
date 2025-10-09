@@ -26,6 +26,12 @@ const SUBJECT_TITLES: Record<string, string> = {
   mech: "Mechanical (ME)"
 };
 
+export async function generateStaticParams() {
+  return Object.keys(LEVELS).map((subject) => ({
+    subject,
+  }));
+}
+
 export default function SubjectLevelsPage({
   params,
 }: { params: { subject: string } }) {
