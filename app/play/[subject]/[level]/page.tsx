@@ -1,4 +1,16 @@
+'use client';
+
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import StackGame from "@/app/components/StackGame";
+import RlcSandbox from "@/app/components/RlcSandbox";
+import BeamBalanceGame from "@/app/components/BeamBalanceGame";
+import QueueGame from "@/app/components/QueueGame";
+import DcCircuit from "@/app/components/DcCircuit";
+import BeamBendingSandbox from "@/app/components/BeamBendingSandbox";
+import SortingBasics from "@/app/components/SortingBasics";
+import GraphEditor from "@/app/components/GraphEditor";
+import SHMSimulator from "@/app/components/SHMSimulator";
 
 // Static params for all valid subject/level combinations
 const LEVEL_ROUTES = [
@@ -21,23 +33,8 @@ export async function generateStaticParams() {
   return LEVEL_ROUTES;
 }
 
-export default function PlayLevelPage({ params }: { params: { subject: string; level: string } }) {
-  return <PlayLevelPageClient subject={params.subject} level={params.level} />;
-}
-
-'use client';
-import { useParams } from "next/navigation";
-import StackGame from "@/app/components/StackGame";
-import RlcSandbox from "@/app/components/RlcSandbox";
-import BeamBalanceGame from "@/app/components/BeamBalanceGame";
-import QueueGame from "@/app/components/QueueGame";
-import DcCircuit from "@/app/components/DcCircuit";
-import BeamBendingSandbox from "@/app/components/BeamBendingSandbox";
-import SortingBasics from "@/app/components/SortingBasics";
-import GraphEditor from "@/app/components/GraphEditor";
-import SHMSimulator from "@/app/components/SHMSimulator";
-
-function PlayLevelPageClient({ subject, level }: { subject: string; level: string }) {
+export default function PlayLevelPage() {
+  const { subject, level } = useParams<{ subject: string; level: string }>();
   const subj = String(subject);
   const lvl = String(level);
 
